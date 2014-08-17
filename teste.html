@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"/>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <style type="text/css">
+.select_outermost_unfocus
+{
+    background-color:red;
+    border: 5px solid red;
+    overflow: hidden;
+    display: none;/*initial value - will be changed with js*/
+
+    /*prevent highlighting*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.select_outermost_unfocus:hover
+{
+    cursor: pointer;
+}
+.select_outermost_focus:hover
+{
+    cursor: pointer;
+}
+.select_outermost_focus/*when the select area is clicked then cap its size*/
+{
+    overflow-y: scroll;
+    overflow: -moz-scrollbars-vertical;
+    height: 100px;
+}
+.select_outermost_focus:focus .unchosen_element/*when the select area is clicked then show all options*/
+{
+    display: inline-block;
+}
+.chosen_element
+{
+    float: left;
+    background-color: lightblue;
+    white-space: nowrap;/*keep text on one line*/
+    clear: both;
+}
+.unchosen_element
+{
+    background-color:grey;
+    display: none;
+    float: left;
+    white-space: nowrap;/*keep text on one line*/
+    clear:both;
+}
+#invisible_screen
+{
+    background-color:green;
+    position: relative;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+}
+        </style>
+        <script type='text/javascript'>
+//global vars
+selected_element_id = 'option1';//initialise
+showing_options = false;
+mousedown = false;
+window.onload = function() {
+//  if(document.getElementById('no_tabindex').getAttribute('tabIndex') !== null) { //mimic safari
+    if(document.getElementById('select_pretty').getAttribute('tabIndex') !== null) {
+        document.getElementById('fallback_select').style.display = 'none';/*hide the html select element*/
+        document.getElementById('select_pretty').style.display = 'inline-block';/*show the js pretty select element*/
+        instate_select_box();
+        hide_options();
+    }
+    else {
+        alert('tabindex not supported - could be safari');
+    };
+};
+function show_options(e) {
+    showing_options = true;
+    document.getElementById('select_pretty').onmousedown = null; //kill the event until unhover
+    document.getElementById('select_pretty').className = 'select_outermost_focus';
+    document.getElementById('select_pretty').focus();/*invoke class .select_outermost_focus .unchosen_element*/
+    document.getElementById('option1').onmouseup = function() {option_clicked('option1');};
+    document.getElementById('option2').onmouseup = function() {option_clicked('option2');};
+    document.getElementById('option3').onmouseup = function() {option_clicked('option3');};
+    document.getElementById('option4').onmouseup = function() {option_clicked('option4');};
+    document.getElementById('option5').onmouseup = function() {option_clicked('option5');};
+};
+function option_clicked(option_id) {
+    if (mousedown)
+        return;
+
+    document.getElementById(selected_element_id).className = 'unchosen_element';
+    selected_element_id = option_id;//save globally
+    document.getElementById(selected_element_id).className = 'chosen_element';
+    hide_options();
+//  document.getElementById('select_pretty').onmouseout = instate_select_box;
+    instate_select_box();
+};
+function select_pretty_mousedown(e)
+{
+    mousedown = true;
+    show_options();
+};
+function select_pretty_mouseup(e)
+{
+    mousedown = false;
+};
+function instate_select_box(e) {
+//alert('mouseout');
+    document.getElementById('select_pretty').onmousedown = select_pretty_mousedown;
+    document.getElementById('select_pretty').onmouseup = select_pretty_mouseup;
+    document.getElementById('select_pretty').onmouseout = null;
+};
+function hide_options() {
+    if(!showing_options) {return;};
+    document.getElementById('option1').onmouseup = null;
+    document.getElementById('option2').onmouseup = null;
+    document.getElementById('option3').onmouseup = null;
+    document.getElementById('option4').onmouseup = null;
+    document.getElementById('option5').onmouseup = null;
+    document.getElementById('select_pretty').className = 'select_outermost_unfocus';
+    showing_options = false;
+};
+        </script>
+    </head>
+    <body>
+        <div id='no_tabindex'></div>
+        <div id='fallback_select'>
+            <select>
+                <option>andora</option>
+                <option>uae</option>
+                <option>afghanistan</option>
+                <option>cook islands</option>
+                <option>germany</option>
+            </select>
+        </div>
+        <a class='select_outermost_unfocus' id='select_pretty' tabindex=0>
+            <div class='chosen_element' id='option1'><img src='http://www.crwflags.com/fotw/misc/wad.gif'>andora</div>
+            <div class='unchosen_element' id='option2'><img src='http://www.crwflags.com/fotw/misc/wae.gif'>uae</div>
+            <div class='unchosen_element' id='option3'><img src='http://www.crwflags.com/fotw/misc/waf.gif'>afghanistan</div>
+            <div class='unchosen_element' id='option4'><img src='http://www.crwflags.com/fotw/misc/wck.gif'>cook islands</div>
+            <div class='unchosen_element' id='option5'><img src='http://www.crwflags.com/fotw/misc/wde.gif'>germany</div>
+        </a>
+    </body>
+</html>

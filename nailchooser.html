@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Iaia Peliculas</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<meta charset="UTF-8">
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"> </script>
+
+<script src="js/jquery.ddslick.min.js"></script>
+<script src="js/fabric.min.js"></script>
+
+<script type="text/javascript">
+$(function() {
+var ddMaos = [
+{
+text: "Curta",
+value: 1,
+description: "Unhas Curtas",
+imageSrc: "http://www.iaiapeliculas.com.br/img/hand1.jpg"
+},
+{
+text: "Média",
+value: 2,
+description: "Unhas Médias",
+imageSrc: "http://www.iaiapeliculas.com.br/img/hand2.jpg"
+},
+{
+text: "Longa",
+value: 3,
+description: "Unhas Longas",
+imageSrc: "http://www.iaiapeliculas.com.br/img/hand3.jpg"
+}
+];
+
+var ddDedos = [
+{
+text: "CA001",
+value: 1,
+description: "Flor Azul",
+imageSrc: "http://www.iaiapeliculas.com.br/artes/arte1.jpg"
+},
+{
+text: "CA002",
+value: 2,
+description: "Description with Twitter",
+imageSrc: "http://www.iaiapeliculas.com.br/artes/arte1_1.jpg"
+},
+{
+text: "CA003",
+value: 3,
+description: "Description with LinkedIn",
+imageSrc: "http://www.iaiapeliculas.com.br/artes/arte2.jpg"
+},
+{
+text: "CA004",
+value: 4,
+description: "Description with LinkedIn",
+imageSrc: "http://www.iaiapeliculas.com.br/artes/arte3.jpg"
+},
+{
+text: "CA005",
+value: 5,
+description: "Description with LinkedIn",
+imageSrc: "http://www.iaiapeliculas.com.br/artes/arte4.jpg"
+},
+{
+text: "CA006",
+value: 6,
+description: "Description with LinkedIn",
+imageSrc: "http://www.iaiapeliculas.com.br/artes/arte5.jpg"
+},
+{
+text: "CA007",
+value: 7,
+description: "Description with LinkedIn",
+imageSrc: "http://www.iaiapeliculas.com.br/artes/arte6.jpg"
+},
+{
+text: "CA008",
+value: 8,
+description: "Description with Foursquare",
+imageSrc: "http://www.iaiapeliculas.com.br/artes/arte7.jpg"
+}
+];
+
+$('#menuMao').ddslick({
+    data: ddMaos,
+    width: 300,
+    height: 150,
+    //defaultSelectedIndex:1,
+    imagePosition: "left",
+    showSelectedHTML: false,
+    selectText: "Selecione o tipo de unha",
+    onSelected: function (data) {
+        var origin = 0;
+        var img = data.selectedData.imageSrc;
+        var imgId = data.selectedData.value;
+        itemDispatcher(origin, img, imgId);
+    }
+});
+
+$('#menuPadrao').ddslick({
+    data: ddDedos,
+    width: 300,
+    height: 100,
+    //defaultSelectedIndex:2,
+    showSelectedHTML: false,
+    imagePosition: "left",
+    selectText: "Aplique um modelo único",
+    onSelected: function (data) {
+        var origin = 1;
+        var img = data.selectedData.imageSrc;
+        var fingerId = 0;
+        itemDispatcher(origin, img, fingerId);
+    }
+});
+
+$('#menuIndicador').ddslick({
+    data: ddDedos,
+    width: 300,
+    height: 100,
+    //defaultSelectedIndex:2,
+    showSelectedHTML: false,
+    imagePosition: "left",
+    selectText: "Escolha o modelo para esta unha",
+    onSelected: function () {
+
+    }
+});
+
+$('#menuMedio').ddslick({
+    data: ddDedos,
+    width: 300,
+    height: 100,
+    //defaultSelectedIndex:2,
+    showSelectedHTML: false,
+    imagePosition: "left",
+    selectText: "Escolha o modelo para esta unha",
+    onSelected: function () {
+
+    }
+});
+
+$('#menuAnelar').ddslick({
+    data: ddDedos,
+    width: 300,
+    height: 100,
+    //defaultSelectedIndex:2,
+    showSelectedHTML: false,
+    imagePosition: "left",
+    selectText: "Escolha o modelo para esta unha",
+    onSelected: function () {
+
+    }
+});
+
+$('#menuMinimo').ddslick({
+    data: ddDedos,
+    width: 300,
+    height: 100,
+    //defaultSelectedIndex:2,
+    showSelectedHTML: false,
+    imagePosition: "left",
+    selectText: "Escolha o modelo para esta unha",
+    onSelected: function () {
+
+    }
+});
+});
+</script>
+
+</head>
+
+<body>
+<div id="container">
+
+  <div id="header" class="header-div">
+    <h1>Iaiá Películas</h1>
+  </div>
+  <div id="main">
+    <div id="canvas-main" class="canvas-main">
+      <canvas id="c1" class="canvas-main" width="420" height="480"></canvas>
+    </div>
+
+    <div id="form_chooser" class="form-group">
+      <!-- <h1>Escolha os tipos que deseja utilizar:</h1> -->
+      <form action="" role="form">
+      <fieldset>
+        <legend>Mãozinha</legend>
+        <table>
+        <tr>
+          <th><div>Tipo de Unha <div id="menuMao"></div></div></th>
+        </tr>
+      </table>
+      </br>
+      </fieldset>
+      </form>
+
+      <form action="">
+      <fieldset>
+      <legend>Dedos</legend>
+
+      <table>
+        <tr>
+          <th><div>Padrão <div id="menuPadrao"></div></div></th>
+          <th class="tdusar"></th>
+        </tr>
+      </table>
+      </br>
+
+      <table>
+        <tr>
+          <td><strong>Indicador </strong><div id="menuIndicador"></div></td>
+          <td class="tdusar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td><strong>Médio </strong><div id="menuMedio"></div></td>
+          <td class="tdusar"></td>
+        </tr>
+        <tr>
+          <td></br><strong>Anelar </strong><div id="menuAnelar"></div></td>
+          <td class="tdusar"></td>
+          <td></br><strong>Mínimo </strong><div id="menuMinimo"></div></td>
+          <td class="tdusar"></td>
+        </tr>
+        <tr>
+          <td class="tdusar"><input type="button" value="Salvar" class="btn btn-default" onclick="Rasterize()"></td>
+        </tr>
+      </table>
+
+      </fieldset>
+      </form>
+    </div>
+  </div>
+
+  <div id="footer">
+  </div>
+</div>
+
+<script>
+  canvas = document.getElementById('c1');
+  context = canvas.getContext('2d');
+</script>
+<!-- <img src="artes/arte1.jpg" id="finger1"> -->
+
+<script src="js/controller.js"></script>
+
+</body>
+</html>
